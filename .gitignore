@@ -1,0 +1,13 @@
+# VS Code
+.vscode/
+.code-workspace
+
+# tests
+.pytest_cache/
+
+# Virtual environments
+venv/
+*.env
+
+# misc
+**__pycache__
