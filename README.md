@@ -8,8 +8,8 @@ This code repository contains my solution for the movie analyzer take-home asses
 
 1. **Clone the repository:**
    ```bash
-   git clone [this-repo-url] [repo-directory-name]
-   cd [repo-directory-name]
+   git clone [this-repo-url] [directory-name]
+   cd [directory-name]
    ```
 2. **Set up virtual environment:**
    ```bash
