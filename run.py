@@ -1,26 +1,23 @@
-from src.movie_analyzer import format_movie_list, get_top_movies
+from src.movie_analyzer import format_movie_list, get_top_movies, similar_movies
 
 
 if __name__ == "__main__":
     sample_raw_list = [
-        [1, 9.3, "The Shawshank Redemption", True],
-        [11, 7.5, "Star Wars: The Phantom Menace", False],
-        [2, 9.2, "The Godfather", True],
-        [3, 9.0, "The Dark Knight", True],
-        [4, 8.8, "Pulp Fiction", True],
-        [10, 8.7, "The Lord of the Rings: The Return of the King", True],
-        [5, 8.5, "Inception", True],
-        [6, 7.8, "Suicide Squad", False],
-        [7, 9.1, "Schindler's List", True],
-        [8, 8.2, "Interstellar", True],
-        [15, 8.9, "Forrest Gump", True],
-        [16, 7.9, "Joker", True],
-        [9, 6.5, "Waterworld", False],
-        [12, 8.4, "The Matrix", True],
-        [13, 8.1, "Fight Club", True],
-        [14, 5.9, "Cats (2019)", False],
-        [17, 8.0, "The Grand Budapest Hotel", True],
-        [18, 4.2, "Battlefield Earth", False]
+        [1, 9.3, 'The Shawshank Redemption', True, ['DRAMA']],
+        [2, 9.2, 'The Godfather', True, ['DRAMA', 'ACTION']],
+        [3, 8.6, 'Parasite', True, ['DRAMA', 'THRILLER']],
+        [4, 8.1, 'Mad Max: Fury Road', True, ['ACTION', 'ADVENTURE', 'SCI-FI']],
+        [5, 9.0, 'The Dark Knight', True, ['ACTION', 'DRAMA']],
+        [6, 8.8, 'Inception', True, ['SCI-FI', 'ACTION', 'ADVENTURE']],
+        [7, 8.0, 'La La Land', True, ['ROMANCE', 'DRAMA', 'COMEDY']],
+        [8, 3.7, 'The Room', False, ['DRAMA', 'ROMANCE']],
+        [9, 5.2, 'Twilight', False, ['ROMANCE', 'FANTASY']],
+        [10, 8.4, 'Avengers: Endgame', True, ['ACTION', 'ADVENTURE', 'SCI-FI']],
+        [11, 8.5, 'Joker', True, ['DRAMA', 'THRILLER']],
+        [12, 8.9, 'The Lion King', True, ['ADVENTURE', 'DRAMA']],
+        [13, 4.1, 'The Last Airbender', False, ['ACTION', 'FANTASY', 'ADVENTURE']],
+        [14, 8.7, 'Titanic', True, ['ROMANCE', 'DRAMA']],
+        [15, 5.5, 'The Meg', False, ['ACTION', 'ADVENTURE']],
     ]
 
     movie_list = format_movie_list(sample_raw_list)
@@ -28,6 +25,9 @@ if __name__ == "__main__":
     top_10 = get_top_movies(movie_list, top_n=10)
     print("Top 10 movies:")
     print(top_10)
+
+    top_10_like_this = similar_movies(movie_list, "Parasite", 8.1)
+    print(top_10_like_this)
 
     top_5 = get_top_movies(movie_list, top_n=5)
     print("Top 5 movies:")

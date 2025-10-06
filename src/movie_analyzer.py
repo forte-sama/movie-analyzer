@@ -1,5 +1,5 @@
 from src.models.movie_model import Movie
-from typing import List, Any, Iterable, Callable
+from typing import List, Any, Iterable, Callable, Union
 import heapq
 
 ConditionChecker = Callable[[Movie], bool]
@@ -71,3 +71,35 @@ def get_top_movies(movies: List[Movie],
     top_movies.sort(key=lambda mov: mov.rating, reverse=True)
 
     return top_movies
+
+
+def similar_movies(movie_list: List[Movie], movie_title: str, rating: Union[float, None]):
+    target_rating = rating
+    target_movies = [
+        mov for mov in movie_list if mov.movie_title == movie_title
+    ]
+
+    if len(target_movies) == 0:
+        raise Exception("No movies named like that")
+
+    target_movie: Movie = target_movies[0]
+
+    if target_rating is None:
+        try:
+            target_rating = target_movie.rating
+        except Exception as e:
+            pass
+
+    def criteria_checker(movie: Movie):
+        rating_condition = max(
+            0, target_rating - 1) < movie.rating < min(10, target_rating + 1)
+        genre_condition = False
+
+        for genre in movie.genres:
+            if genre in target_movie.genres:
+                genre_condition = True
+                break
+
+        return rating_condition and genre_condition
+
+    return get_top_movies(movie_list, condition_checker=criteria_checker)
